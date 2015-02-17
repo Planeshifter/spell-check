@@ -1,31 +1,46 @@
 R = require 'ramda'
+ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+
+get_deletes = (splits) ->
+  splits.map( (elem) -> elem[0] + elem[1][1...] )
+
+get_inserts = (splits) ->
+  inserts = []
+  for letter in ALPHABET
+    splits.forEach( (elem) -> inserts.push elem[0] + letter + elem[1] )
+  return inserts
+
+get_replacements = (splits) ->
+  replacements = []
+  for letter in ALPHABET
+    splits.forEach( (elem) ->
+      replacements.push elem[0] + letter + elem[1][1...] if elem[1]
+    )
+
+get_transpositions = (splits) ->
+  splits
+    .filter( (e) -> e[1].length > 1)
+    .map( (e) -> e[0] + e[1][1] + e[1][0] + e[1][2...])
 
 find_edits1_of = (word) ->
-  alphabet = "abcdefghijklmnopqrstuvwxyz"
   splits = []
   splits.push [word[...i], word[i...]] for i in R.range(0, word.length + 1)
-
-  deletes = []
-  for elem in splits
-    deletes.push elem[0] + elem[1][1...]
-
-  inserts = []
-  for letter in alphabet
-    for elem in splits
-      inserts.push elem[0] + letter + elem[1]
-
-  replacements = []
-  for letter in alphabet
-    for elem in splits
-      replacements.push elem[0] + letter + elem[1][1...] if elem[1]
-
-  transpositions = []
-  for elem in splits
-    if elem[1].length > 1
-      transpositions.push elem[0] + elem[1][1] + elem[1][0] + elem[1][2...]
-
   makeSet = R.compose(R.uniq, R.concat)
-  return makeSet deletes, inserts, replacements, transpositions
+  return makeSet(
+    get_deletes(splits),
+    get_inserts(splits),
+    get_replacements(splits),
+    get_transpositions(splits)
+  )
 
 find_edits2_of = (word) ->
   R.pipe( find_edits1_of, R.map( (w) -> find_edits1_of(w) ), R.flatten ) (word)
+
+spell = (word) ->
+  # not implemented yet
+
+module.exports = exports = {
+  "spell" : spell,
+  "find_edits1_of" : find_edits1_of,
+  "find_edits2_of" : find_edits2_of
+}
