@@ -1,0 +1,38 @@
+{
+  "name": "spell-check",
+  "version": "0.1.0",
+  "description": "simple spelling checker",
+  "main": "lib/spelling.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/test.coffee --compilers coffee:coffee-script/register",
+    "prepublish": "coffee -o lib -c src/*.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Planeshifter/locality-sensitive-hashing.git"
+  },
+  "keywords": [
+    "hashing",
+    "nearest-neigbors",
+    "dimensionality-reduction",
+    "search-algorithms",
+    "classification-algorithms"
+  ],
+  "author": "Philipp Burckhardt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Planeshifter/locality-sensitive-hashing/issues"
+  },
+  "homepage": "https://github.com/Planeshifter/locality-sensitive-hashing",
+  "devDependencies": {
+    "chai": "^2.0.0",
+    "mocha": "^2.1.0",
+    "coffee-script": "^1.9.0"
+  },
+  "dependencies": {
+    "ramda": "^0.10.0"
+  }
+}
