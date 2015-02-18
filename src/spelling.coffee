@@ -2,7 +2,7 @@ R = require 'ramda'
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 
 get_deletes = (splits) ->
-  splits.map( (elem) -> elem[0] + elem[1][1...] )
+  return splits.map( (elem) -> elem[0] + elem[1][1...] )
 
 get_inserts = (splits) ->
   inserts = []
@@ -16,9 +16,10 @@ get_replacements = (splits) ->
     splits.forEach( (elem) ->
       replacements.push elem[0] + letter + elem[1][1...] if elem[1]
     )
+  return replacements
 
 get_transpositions = (splits) ->
-  splits
+  return splits
     .filter( (e) -> e[1].length > 1)
     .map( (e) -> e[0] + e[1][1] + e[1][0] + e[1][2...])
 
