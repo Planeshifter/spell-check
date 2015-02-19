@@ -1,6 +1,10 @@
+# load dependencies
 R = require 'ramda'
+
+# global variables
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 
+# private functions
 get_deletes = (splits) ->
   return splits.map( (elem) -> elem[0] + elem[1][1...] )
 
@@ -23,6 +27,12 @@ get_transpositions = (splits) ->
     .filter( (e) -> e[1].length > 1)
     .map( (e) -> e[0] + e[1][1] + e[1][0] + e[1][2...])
 
+###
+  FUNCTION: find_edits1_of( word )
+  Finds all strings one edit distance away from input word
+  @param {String} word - input word
+  @returns {Array} result set - strings one edit distance away from input word
+###
 find_edits1_of = (word) ->
   splits = []
   splits.push [word[...i], word[i...]] for i in R.range(0, word.length + 1)
@@ -34,12 +44,31 @@ find_edits1_of = (word) ->
     get_transpositions(splits)
   )
 
+###
+ FUNCTION: find_edits2_of( word )
+ Finds all strings two edit distances away from word
+ @param {String} word - input word
+ @returns {Array} result set - strings two edit distances away from input word
+###
 find_edits2_of = (word) ->
-  R.pipe( find_edits1_of, R.map( (w) -> find_edits1_of(w) ), R.flatten ) (word)
+  R.pipe(
+    find_edits1_of,
+    R.map( (w) -> find_edits1_of(w) ),
+    R.flatten,
+    R.uniq
+  ) (word)
 
+###
+ FUNCTION: spell( word )
+ Finds possible correction for input word
+ @param {String} word - input word
+ @returns {String} the suggested correction
+###
 spell = (word) ->
-  # not implemented yet
+  # not implemented yet, did only spelling 1 HW so far
 
+
+# exported namespace
 module.exports = exports = {
   "spell" : spell,
   "find_edits1_of" : find_edits1_of,
