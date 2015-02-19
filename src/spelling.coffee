@@ -52,10 +52,10 @@ find_edits1_of = (word) ->
 ###
 find_edits2_of = (word) ->
   R.pipe(
-    find_edits1_of,
-    R.map( (w) -> find_edits1_of(w) ),
-    R.flatten,
-    R.uniq
+    find_edits1_of, # find all strings one edit distance away of word
+    R.map( (w) -> find_edits1_of(w) ),  # run find_edits_1_of for each of them
+    R.flatten, # flatten the returned array of arrays
+    R.uniq # discard duplicate elements
   ) (word)
 
 ###
