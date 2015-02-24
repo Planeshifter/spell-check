@@ -116,5 +116,3 @@ module.exports = exports = {
   "find_edits2_of" : find_edits2_of,
   "fetch_unigram_data"  : fetch_unigram_data
 }
-
-spell("langauge").then( (res) -> console.log res )
