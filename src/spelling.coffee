@@ -87,7 +87,8 @@ get_top_term = (arr) ->
  FUNCTION: spell( word )
  Finds possible correction for input word
  @param {String} word - input word
- @returns {String} the suggested correction
+ @param {Function} callback - optional callback function which has two parameters: error, result.
+ @returns {Promise} a Promise for the suggested correction
 ###
 spell = (input, callback) ->
   fword   = fetch_unigram_data( R.of(input) )
