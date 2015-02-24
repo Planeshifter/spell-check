@@ -1,5 +1,8 @@
 # load libraries
 chai = require 'chai'
+chaiAsPromised = require 'chai-as-promised'
+chai.use(chaiAsPromised)
+
 expect = chai.expect
 R = require 'ramda'
 
@@ -10,6 +13,7 @@ R = require 'ramda'
 truth = JSON.parse require('fs').readFileSync(__dirname + "/truth.json")
 
 describe("find_edits1_of()", () ->
+  this.timeout(10000)
   it("returns the correct list for word 'the'", () ->
     candidates = find_edits1_of("the")
     expect(R.difference(truth.the, candidates).length).to.be.equal(0)
@@ -25,6 +29,7 @@ describe("find_edits1_of()", () ->
 )
 
 describe("find_edits2_of()", () ->
+  this.timeout(10000)
   it("returns the correct list for word 'bed'", () ->
     candidates = find_edits2_of("bed")
     expect(R.difference(truth.bed, candidates).length).to.be.equal(0)
@@ -32,5 +37,10 @@ describe("find_edits2_of()", () ->
 )
 
 describe("spell()", () ->
-
+  this.timeout(10000)
+  it("returns the correct results for some spelling mistakes", () ->
+    expect(spell("haert")).to.eventually.be.equal("heart")
+    expect(spell("helllo")).to.eventually.be.equal("hello")
+    expect(spell("guesed")).to.eventually.be.equal("guessed")
+  )
 )
