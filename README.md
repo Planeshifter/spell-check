@@ -34,12 +34,14 @@ returns a `Promise`.
 spell("haert", function(err, res){
   console.log(res);
 });
+// returns: heart 
 ```
 
 ```coffeescript
 spell("haert", (err, res) ->
   console.log res
 )
+# returns: heart 
 ```
 
 #### Using Promises
@@ -48,10 +50,12 @@ spell("haert", (err, res) ->
 spell("lagauge").then(function(res){
   console.log(res);
 });
+// returns: language
 ```
 
 ```coffeescript
 spell("langauge").then( (res) -> console.log res )
+# returns: language
 ```
 
 ## Unit Tests
