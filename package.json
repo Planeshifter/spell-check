@@ -1,5 +1,5 @@
 {
-  "name": "spell-check",
+  "name": "@planeshifter/spell-check",
   "version": "0.1.0",
   "description": "simple spelling checker",
   "main": "lib/spelling.js",
