@@ -30,6 +30,7 @@ returns a `Promise`.
 
 #### Callback Style
 
+JavaScript:
 ```js
 spell("haert", function(err, res){
   console.log(res);
@@ -37,6 +38,7 @@ spell("haert", function(err, res){
 // returns: heart 
 ```
 
+CoffeeScript:
 ```coffeescript
 spell("haert", (err, res) ->
   console.log res
@@ -46,6 +48,7 @@ spell("haert", (err, res) ->
 
 #### Using Promises
 
+JavaScript:
 ```js
 spell("lagauge").then(function(res){
   console.log(res);
@@ -53,6 +56,7 @@ spell("lagauge").then(function(res){
 // returns: language
 ```
 
+CoffeeScript:
 ```coffeescript
 spell("langauge").then( (res) -> console.log res )
 # returns: language
