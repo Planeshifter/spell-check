@@ -29,7 +29,7 @@ describe("find_edits1_of()", () ->
 )
 
 describe("find_edits2_of()", () ->
-  this.timeout(10000)
+  this.timeout(20000)
   it("returns the correct list for word 'bed'", () ->
     candidates = find_edits2_of("bed")
     expect(R.difference(truth.bed, candidates).length).to.be.equal(0)
